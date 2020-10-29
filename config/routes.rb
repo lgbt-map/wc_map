@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   root to: 'coordinates#index'
-  resources :maps, only: [:show]
   resources :coordinates, only: [:show, :new, :create]
-  post 'search', to: 'coordinates#search'
-  get 'search', to: 'coordinates#index'
+  post '', to: 'coordinates#search', as: 'search'
 end

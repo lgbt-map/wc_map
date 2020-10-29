@@ -23,21 +23,6 @@
               <i class="fas fa-times"></i>
             </div>
           </div>
-          <div class="sidebar-header">
-            <div class="user-pic">
-              <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
-            </div>
-            <div class="user-info">
-              <span class="user-name">XXX
-                <strong>XXXX</strong>
-              </span>
-              <span class="user-role">Guest</span>
-              <span class="user-status">
-                <i class="fa fa-circle"></i>
-                <span>Online</span>
-              </span>
-            </div>
-          </div>
           <!-- sidebar-header  -->
           <div class="sidebar-search">
             <div>
@@ -57,17 +42,39 @@
               <p style="color: #6c7b88; padding-top: 15px;"><b>絞り込み検索</b></p>
             </div>
             <ul>
-              <li class="header-menu">
-                <span>利用時間</span>
-              </li>
-              <li class="header-menu">
-                <span>その他</span>
-              </li>
               <%= form_with scope: :column, url: search_path, local: true do |f| %>
+                <li class="header-menu">
+                  <span>利用時間</span>
+                </li>
+                <li class="sidebar-dropdown" style="margin-top: 10px;">
+                  <div class="row">
+                    <div class="col-sm-4 offset-2">
+                      <p class="sb-p">利用開始</p>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <%= f.select :start_time, ["12:00", "12:15", "12:30", "12:45"], {}, class: "custom-select", style: "color: #818896;" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4 offset-2">
+                      <p class="sb-p">滞在時間</p>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <%= f.select :stay_time, ["5分", "10分", "15分", "20分"], {}, class: "custom-select", style: "color: #818896;" %>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="header-menu">
+                  <span>その他</span>
+                </li>
                 <li class="sidebar-dropdown">
                   <div class="row">
                     <div class="offset-3">
-                      <div class="custom-control custom-checkbox text-leftr">
+                      <div class="custom-control custom-checkbox text-left">
                         <%= f.check_box :toilet_jp, class: "custom-control-input sb-menu" %>
                         <%= f.label :toilet_jp, "和式", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
