@@ -23,16 +23,14 @@ class CoordinatesController < ApplicationController
   end
 
   def search
-    gon.coordinates = Coordinate.joins(:facility).where(facilities: {
-                                                          toilet_jp: params[:toilet_jp],
-                                                          toilet_west: params[:toilet_west],
-                                                          washlet: params[:washlet],
-                                                          powder_room: params[:powder_room],
-                                                          changing_table: params[:changing_table],
-                                                          ostomate: params[:ostomate],
-                                                          can_everyone: params[:can_everyone],
-                                                          gender_separation: params[:gender_separation],
-                                                          wheelchair: params[:wheelchair]})
+    param_lists = params[:column].permit!.to_hash
+    gon.coordinates = Coordinate.all
+    param_lists.each do |column, value|
+      if value == "1"
+        column = 'facilities.' + column
+        gon.coordinates = gon.coordinates.joins(:facility).where("#{column} LIKE ?", true)
+      end
+    end
     render :index
   end
 

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :maps, only: [:show]
   resources :coordinates, only: [:show, :new, :create]
   post 'search', to: 'coordinates#search'
+  get 'search', to: 'coordinates#index'
 end

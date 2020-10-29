@@ -63,12 +63,12 @@
               <li class="header-menu">
                 <span>その他</span>
               </li>
-              <%= form_with url: search_path, local: true do |f| %>
+              <%= form_with scope: :column, url: search_path, local: true do |f| %>
                 <li class="sidebar-dropdown">
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-leftr">
-                        <%= f.check_box :toilet_jp, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :toilet_jp, class: "custom-control-input sb-menu" %>
                         <%= f.label :toilet_jp, "和式", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -76,7 +76,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :toilet_west, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :toilet_west, class: "custom-control-input sb-menu" %>
                         <%= f.label :toilet_west, "洋式", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -84,7 +84,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :washlet, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :washlet, class: "custom-control-input sb-menu" %>
                         <%= f.label :washlet, "ウォシュレット", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -92,7 +92,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :powder_room, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :powder_room, class: "custom-control-input sb-menu" %>
                         <%= f.label :powder_room, "パウダールーム", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -100,7 +100,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :changing_table, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :changing_table, class: "custom-control-input sb-menu" %>
                         <%= f.label :changing_table, "おむつ交換台設備", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -108,7 +108,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :ostomate, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :ostomate, class: "custom-control-input sb-menu" %>
                         <%= f.label :ostomate, "オストメイト", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -116,7 +116,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :can_everyone, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :can_everyone, class: "custom-control-input sb-menu" %>
                         <%= f.label :can_everyone, "誰でもトイレ", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -124,7 +124,7 @@
                   <div class="row">
                     <div class="offset-3">
                       <div class="custom-control custom-checkbox text-left">
-                        <%= f.check_box :gender_separation, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                        <%= f.check_box :gender_separation, class: "custom-control-input sb-menu" %>
                         <%= f.label :gender_separation, "男女別", class: "custom-control-label", style: "color: #818896;" %>
                       </div>
                     </div>
@@ -133,7 +133,7 @@
                     <div class="row">
                       <div class="offset-3">
                         <div class="custom-control custom-checkbox text-left">
-                          <%= f.check_box :wheelchair, {class: "custom-control-input sb-menu"}, "1", "%" %>
+                          <%= f.check_box :wheelchair, class: "custom-control-input sb-menu" %>
                           <%= f.label :wheelchair, "車いす対応", class: "custom-control-label", style: "color: #818896;" %>
                         </div>
                       </div>
