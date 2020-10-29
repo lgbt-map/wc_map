@@ -1,0 +1,142 @@
+<div class="alert alert-secondary" role="alert">
+  <div class="alert alert-light" role="alert">
+    <div class="text-center">
+      <h5><%= @coordinate.name %></h5>
+      <%= attachment_image_tag @coordinate, :image, :fill, 200, 130, size: "200x130", fallback: "no_image.jpg", id: 'coord_img' %>
+      <hr class="show-hr">
+      <div class="row">
+        <div class="col-sm-6 offset-3">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td>利用可能な時間：</td>
+                <td>24時間利用可能</td>
+              </tr>
+              <tr>
+                <td>休業日：</td>
+                <td>-----</td>
+              </tr>
+              <tr>
+                <td>メモ：</td>
+                <% if @coordinate.memo.nil? %>
+                  <td>-----</td>
+                <% else %>
+                  <td><%= @coordinate.memo %></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-10 offset-1 alert alert-secondary">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">和式</p>
+                <hr class="show-hr">
+                <% if @facility.toilet_jp %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">洋式</p>
+                <hr class="show-hr">
+                <% if @facility.toilet_west %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">ウォシュレット</p>
+                <hr class="show-hr">
+                <% if @facility.washlet %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">パウダールーム</p>
+                <hr class="show-hr">
+                <% if @facility.powder_room %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">おむつ交換台設備</p>
+                <hr class="show-hr">
+                <% if @facility.changing_table %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">オストメイト</p>
+                <hr class="show-hr">
+                <% if @facility.ostomate %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">誰でもトイレ</p>
+                <hr class="show-hr">
+                <% if @facility.can_everyone %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">男女別</p>
+                <hr class="show-hr">
+                <% if @facility.gender_separation %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="alert alert-light">
+                <p style="color: black;">車いす対応</p>
+                <hr class="show-hr">
+                <% if @facility.wheelchair %>
+                  <i class="far fa-circle"></i>
+                <% else %>
+                  <br>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
