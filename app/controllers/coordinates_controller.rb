@@ -33,7 +33,6 @@ class CoordinatesController < ApplicationController
                                                           can_everyone: params[:can_everyone],
                                                           gender_separation: params[:gender_separation],
                                                           wheelchair: params[:wheelchair]})
-    byebug
     render :index
   end
 
