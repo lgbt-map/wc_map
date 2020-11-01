@@ -32,3 +32,5 @@
 
 # in this file is written next info: google maps api
 .env
+.Gemlock.lock
+db/schema.rb

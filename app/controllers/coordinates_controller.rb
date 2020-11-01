@@ -36,10 +36,9 @@ class CoordinatesController < ApplicationController
 
   private
   def coordinate_params
-    params.require(:coordinate).permit(:name, :memo, :address, :image,
-                                       :latitude, :longitude,
+    params.require(:coordinate).permit(:name, :memo, :address, :image, :latitude, :longitude,
                                        facility_attributes: [:toilet_jp, :toilet_west, 
-                                                            :washlet, :powder_room, :changing_table, :ostomate,
-                                                            :can_everyone, :gender_separation, :wheelchair])
+                                                             :washlet, :powder_room, :changing_table, :ostomate,
+                                                             :can_everyone, :gender_separation, :wheelchair])
   end
 end
