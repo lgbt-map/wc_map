@@ -6,6 +6,14 @@ class CoordinatesController < ApplicationController
   def show
     @coordinate = Coordinate.find(params[:id])
     @facility = @coordinate.facility
+    @evaluations = @coordinate.evaluations
+    gon.evaluation_columns = Evaluation.column_names.slice(2.. -3)
+    gon.evaluate = [@evaluations.sum(:cleanliness), @evaluations.sum(:breadth),
+                    @evaluations.sum(:luxury), @evaluations.sum(:use_rate), @evaluations.sum(:security)]
+    evaluations_num = @evaluations.count
+    gon.data = gon.evaluate.map do |value|
+      value / evaluations_num
+    end
   end
 
   def new
@@ -16,6 +24,7 @@ class CoordinatesController < ApplicationController
   def create
     @coordinate = Coordinate.new(coordinate_params)
     if @coordinate.save
+      @coordinate.evaluations.create(evaluation_params)
       redirect_to root_path
     else
       render :new
@@ -37,8 +46,12 @@ class CoordinatesController < ApplicationController
   private
   def coordinate_params
     params.require(:coordinate).permit(:name, :memo, :address, :image, :latitude, :longitude,
-                                       facility_attributes: [:toilet_jp, :toilet_west, 
+                                       facility_attributes: [:toilet_jp, :toilet_west,
                                                              :washlet, :powder_room, :changing_table, :ostomate,
                                                              :can_everyone, :gender_separation, :wheelchair])
+  end
+
+  def evaluation_params
+    params[:coordinate].require(:evaluation).permit(:cleanliness, :breadth, :luxury, :use_rate, :security)
   end
 end

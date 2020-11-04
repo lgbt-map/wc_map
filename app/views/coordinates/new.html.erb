@@ -1,5 +1,4 @@
-<%= form_with model: @coordinate do |f| %>
-
+<%= form_with model: @coordinate, local: true do |f| %>
   <div class="row">
     <div class="col-sm-10 offset-1">
       <div class="row">
@@ -113,6 +112,108 @@
         </div>
       <% end %>
       <div class="row">
+        <div class="col-sm-10 offset-1">
+          <h4 style="padding-top: 60px;"><strong>トイレ評価</strong></h4>
+          <hr>
+        </div>
+      </div>
+      <%= f.fields_for :evaluation do |fe| %>
+        <div class="row">
+          <div class="col-sm-10 offset-1">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="cleanliness">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :cleanliness, "清潔感　　　　　　　" %>
+                    <%= fe.hidden_field :cleanliness, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="breadth">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :breadth, "広さ　　　　　　　　" %>
+                    <%= fe.hidden_field :breadth, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="luxury">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :luxury, "高級感　　　　　　　" %>
+                    <%= fe.hidden_field :luxury, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="use_rate">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :use_rate, "人の出入り　　　　　" %>
+                    <%= fe.hidden_field :use_rate, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="security">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :security, "プライバシー保護　　" %>
+                    <%= fe.hidden_field :security, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
         <div class="col-sm-6 offset-3">
           <%= f.submit '保存', class:"btn btn-secondary btn-block" %>
         </div>
@@ -195,5 +296,52 @@
     });
   });
 
+// for evaluation
+  function mouseOver (element) {
+    element.nextAll().removeClass('fas').addClass( "far" );
+    element.prevAll().removeClass( "far" ).addClass('fas');
+    element.removeClass( "far" ).addClass('fas');
+  };
+
+  function mouseLeave (element) {
+    element.nextAll().removeClass('fas').addClass('far');
+    element.prevAll().removeClass('far').addClass('fas');
+    element.removeClass('far').addClass('fas');
+  };
+
+  function mouseClick (element, className, idName) {
+    element.addClass(className).siblings().removeClass(className);
+    var score = element.prevAll().length + 1;
+    document.getElementById(idName).value = score;
+  }
+
+  $('.cleanliness').on('mouseover', function(){ mouseOver($(this)); });
+  $('.cleanliness').on('mouseleave', function(){ mouseLeave($('.cleanliness-active')); });
+  $('.cleanliness').on('click',function(){ mouseClick($(this), "cleanliness-active", "coordinate_evaluation_cleanliness"); });
+
+  $('.breadth').on('mouseover', function(){ mouseOver($(this)); });
+  $('.breadth').on('mouseleave', function(){ mouseLeave($('.breadth-active')); });
+  $('.breadth').on('click',function(){ mouseClick($(this), "breadth-active", "coordinate_evaluation_breadth"); });
+  
+  $('.luxury').on('mouseover', function(){ mouseOver($(this)); });
+  $('.luxury').on('mouseleave', function(){ mouseLeave($('.luxury-active')); });
+  $('.luxury').on('click',function(){ mouseClick($(this), "luxury-active", "coordinate_evaluation_luxury"); });
+  
+  $('.ur').on('mouseover', function(){ mouseOver($(this)); });
+  $('.ur').on('mouseleave', function(){ mouseLeave($('.ur-active')); });
+  $('.ur').on('click',function(){ mouseClick($(this), "ur-active", "coordinate_evaluation_use_rate"); });
+  
+  $('.sec').on('mouseover', function(){ mouseOver($(this)); });
+  $('.sec').on('mouseleave', function(){ mouseLeave($('.sec-active')); });
+  $('.sec').on('click',function(){ mouseClick($(this), "sec-active", "coordinate_evaluation_security"); });
+
+
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>" async defer></script>
+
+<style>
+.fa .fas{
+  font-size:30px;
+}
+
+</style>

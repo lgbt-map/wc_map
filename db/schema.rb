@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_101100) do
+ActiveRecord::Schema.define(version: 2020_11_02_060833) do
 
   create_table "coordinates", force: :cascade do |t|
     t.float "latitude"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 2020_10_28_101100) do
     t.string "memo", default: "-----"
     t.string "address"
     t.string "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer "coordinate_id"
+    t.float "cleanliness", default: 0.0
+    t.float "breadth", default: 0.0
+    t.float "luxury", default: 0.0
+    t.float "use_rate", default: 0.0
+    t.float "security", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
