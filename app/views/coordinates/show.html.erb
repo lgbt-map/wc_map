@@ -11,7 +11,7 @@
               <tr>
                 <td style="color: #555555;">メモ：</td>
                 <% if @coordinate.memo.nil? %>
-                  <td>-----</td>
+                  <td>----------</td>
                 <% else %>
                   <td><%= @coordinate.memo %></td>
                 <% end %>
@@ -129,6 +129,44 @@
           </div>
         </div>
       </div>
+    <div class="row">
+      <div class="col-sm-10 offset-1">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
     </div>
   </div>
 </div>
+
+<script>
+  var ctx = document.getElementById("myChart");
+  var myChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      // labels: gon.evaluation_columns,
+      labels: ["清潔感", "広さ", "高級感", "人の出入り", "プライバシー保護"],
+      datasets: [{
+        label: 'トイレ評価',
+        backgroundColor: "rgba(226,227,229,0.6)",
+        borderColor: "rgba(214,216,219,1)",
+        data: gon.data
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scale: {
+        gridLines: {
+            lineWidth: [1, 1, 1, 1, 1]
+        },
+        ticks: {
+          min: 0,
+          max: 5,
+          stepSize: 1,
+          display: false                             
+        }
+      }
+    }
+  });
+</script>

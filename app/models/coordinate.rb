@@ -1,7 +1,10 @@
 class Coordinate < ApplicationRecord
   attachment :image
   has_one :facility
+  has_many :evaluations
+
   accepts_nested_attributes_for :facility, allow_destroy: true
+  accepts_nested_attributes_for :evaluations, allow_destroy: true
   
   with_options presence: true do
     validates :name

@@ -69,3 +69,4 @@ gem 'gon'
 gem 'geocoder'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+gem 'chart-js-rails', '~> 0.1.4'

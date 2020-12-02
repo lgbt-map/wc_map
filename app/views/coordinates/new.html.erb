@@ -1,14 +1,13 @@
-<%= form_with model: @coordinate do |f| %>
-
-   <div class="row">
-     <div class="col-sm-10 offset-1">
-       <div class="row">
-         <div class="col-sm-10 offset-1">
-           <h4 style="padding-top: 60px;"><font color=cornflowerblue><strong>新規投稿</strong></font></h4>
-           <hr>
-         </div>
-       </div>
-       <div class="form-group" style="padding-top: 60px;" >
+<%= form_with model: @coordinate, local: true do |f| %>
+  <div class="row">
+    <div class="col-sm-10 offset-1">
+      <div class="row">
+        <div class="col-sm-10 offset-1">
+          <h4 style="padding-top: 60px;"><font color=cornflowerblue><strong>新規投稿</strong></font></h4>
+          <hr>
+        </div>
+      </div>
+      <div class="form-group" style="padding-top: 60px;" >
         <div class="row">
           <div class="col-sm-5 offset-1">
             <strong><font color=dimgray>施設名 </font><span class="badge badge-danger">必須</span></strong>
@@ -19,106 +18,208 @@
             <%= f.text_area :memo, rows: "5", value: "", class: 'form-control', placeholder: '例) 入口に大きな段差あり' %>
           </div>
         </div>
-       </div>
-       <div class="form-group">
-         <div class="row">
-           <div class="col-sm-10 offset-1">
-             <strong><font color=dimgray>住所 </font><span class="badge badge-danger">必須</span></strong>
-             <%= f.text_field :address, class: 'form-control', id: "input-address", placeholder: '例) 東京都千代田区丸の内１丁目' %>
-           </div>
-         </div>
-       </div>
-       <div class="row">
-         <div class="col-sm-5 offset-1">
-           <p>有効な住所かの確認のため、ボタンをクリックしてください</p>
-         </div>
-         <div class="col-sm-4 offset-1">
-           <%= f.hidden_field :latitude, id: "input-latitude" %>
-           <%= f.hidden_field :longitude, id: "input-longitude" %>
-           <%#= f.text_field :latitude, id: "input-latitude" %>
-           <%#= f.text_field :longitude, id: "input-longitude" %>
-           <button type="button" class="btn btn-secondary btn-block" id="is_active">
-             <span class="" id="check-icon"><b>Check</b></span>
-           </button>
-         </div>
-       </div>
-       <div class="form-group">
-         <div class="row">
-           <div class="col-sm-5 offset-1">
-             <strong><font color=dimgray>画像</font></strong>
-             <%= attachment_image_tag @coordinate, :image, :fill, 180, 120, size: "270x180", fallback: "no_image.jpg", id: 'coord_img' %>
-             <%= f.attachment_field :image, id: "post_img" %>
-           </div>
-         </div>
-       </div>
-       <div class="row">
-         <div class="col-sm-10 offset-1">
-           <h4 style="padding-top: 60px;"><font color=dimgray><strong>設備</strong></font></h4>
-           <hr>
-         </div>
-       </div>
-       <%= f.fields_for :facility do |ff| %>
-         <div class="form-group">
-           <div class="row">
-             <div class="col-sm-4 offset-1 alert alert-secondary text-center">
-               <h5><font color=cornflowerblue><b>Toilet Style</b></font></h5>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :toilet_jp, class: "custom-control-input" %>
-                 <%= ff.label :toilet_jp, "和式トイレ", class: "custom-control-label" %>
-               </div>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :toilet_west, class: "custom-control-input" %>
-                 <%= ff.label :toilet_west, "洋式トイレ", class: "custom-control-label" %>
-               </div>
-             </div>
-             <div class="col-sm-4 offset-2 alert alert-secondary text-center">
-               <h5><font color=cornflowerblue><b>Optional</b></font></h5>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :washlet, class: "custom-control-input" %>
-                 <%= ff.label :washlet, "ウォシュレット　", class: "custom-control-label" %>
-               </div>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :powder_room, class: "custom-control-input" %>
-                 <%= ff.label :powder_room, "パウダールーム　", class: "custom-control-label" %>
-               </div>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :changing_table, class: "custom-control-input" %>
-                 <%= ff.label :changing_table, "おむつ交換台設備", class: "custom-control-label" %>
-               </div>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :ostomate, class: "custom-control-input" %>
-                 <%= ff.label :ostomate, "オストメイト　　", class: "custom-control-label" %>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="form-group">
-           <div class="row">
-             <div class="col-sm-4 offset-1 alert alert-secondary text-center">
-               <h5><font color=cornflowerblue><b>Usage classification</b></font></h5>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :can_everyone, class: "custom-control-input" %>
-                 <%= ff.label :can_everyone, "誰でもトイレ", class: "custom-control-label" %>
-               </div>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :gender_separation, class: "custom-control-input" %>
-                 <%= ff.label :gender_separation, "男女別　　　", class: "custom-control-label" %>
-               </div>
-               <div class="custom-control custom-checkbox">
-                 <%= ff.check_box :wheelchair, class: "custom-control-input" %>
-                 <%= ff.label :wheelchair, "車いす対応　", class: "custom-control-label" %>
-               </div>
-             </div>
-           </div>
-         </div>
-       <% end %>
-       <div class="row">
-         <div class="col-sm-6 offset-3">
-           <%= f.submit '投稿', class:"btn btn-secondary btn-block" %>
-         </div>
-       </div>
-     </div>
-   </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-10 offset-1">
+            <strong><font color=dimgray>住所 </font><span class="badge badge-danger">必須</span></strong>
+            <%= f.text_field :address, class: 'form-control', id: "input-address", placeholder: '例) 東京都千代田区丸の内１丁目' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5 offset-1">
+          <p>有効な住所かの確認のため、ボタンをクリックしてください</p>
+        </div>
+        <div class="col-sm-4 offset-1">
+          <%= f.hidden_field :latitude, id: "input-latitude" %>
+          <%= f.hidden_field :longitude, id: "input-longitude" %>
+          <%#= f.text_field :latitude, id: "input-latitude" %>
+          <%#= f.text_field :longitude, id: "input-longitude" %>
+          <button type="button" class="btn btn-secondary btn-block" id="is_active">
+            <span class="" id="check-icon"><b>Check</b></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-5 offset-1">
+            <p>画像</p>
+            <%= attachment_image_tag @coordinate, :image, :fill, 180, 120, size: "270x180", fallback: "no_image.jpg", id: 'coord_img' %>
+            <%= f.attachment_field :image, id: "post_img" %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-10 offset-1">
+          <h4 style="padding-top: 60px;"><font color=dimgray><strong>設備</strong></font></h4>
+          <hr>
+        </div>
+      </div>
+      <%= f.fields_for :facility do |ff| %>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-4 offset-1 alert alert-secondary text-center">
+              <h5><font color=cornflowerblue><b>Toilet Style</b></font></h5>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :toilet_jp, class: "custom-control-input" %>
+                <%= ff.label :toilet_jp, "和式トイレ", class: "custom-control-label" %>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :toilet_west, class: "custom-control-input" %>
+                <%= ff.label :toilet_west, "洋式トイレ", class: "custom-control-label" %>
+              </div>
+            </div>
+            <div class="col-sm-4 offset-2 alert alert-secondary text-center">
+              <h5><font color=cornflowerblue><b>Optional</b></font></h5>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :washlet, class: "custom-control-input" %>
+                <%= ff.label :washlet, "ウォシュレット　", class: "custom-control-label" %>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :powder_room, class: "custom-control-input" %>
+                <%= ff.label :powder_room, "パウダールーム　", class: "custom-control-label" %>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :changing_table, class: "custom-control-input" %>
+                <%= ff.label :changing_table, "おむつ交換台設備", class: "custom-control-label" %>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :ostomate, class: "custom-control-input" %>
+                <%= ff.label :ostomate, "オストメイト　　", class: "custom-control-label" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-4 offset-1 alert alert-secondary text-center">
+              <h5><font color=cornflowerblue><b>Usage classification</b></font></h5>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :can_everyone, class: "custom-control-input" %>
+                <%= ff.label :can_everyone, "誰でもトイレ", class: "custom-control-label" %>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :gender_separation, class: "custom-control-input" %>
+                <%= ff.label :gender_separation, "男女別　　　", class: "custom-control-label" %>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%= ff.check_box :wheelchair, class: "custom-control-input" %>
+                <%= ff.label :wheelchair, "車いす対応　", class: "custom-control-label" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-sm-10 offset-1">
+          <h4 style="padding-top: 60px;"><strong>トイレ評価</strong></h4>
+          <hr>
+        </div>
+      </div>
+      <%= f.fields_for :evaluation do |fe| %>
+        <div class="row">
+          <div class="col-sm-10 offset-1">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="cleanliness">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :cleanliness, "清潔感　　　　　　　" %>
+                    <%= fe.hidden_field :cleanliness, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                      <i class="far fa-star fa-2x cleanliness"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="breadth">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :breadth, "広さ　　　　　　　　" %>
+                    <%= fe.hidden_field :breadth, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                      <i class="far fa-star fa-2x breadth"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="luxury">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :luxury, "高級感　　　　　　　" %>
+                    <%= fe.hidden_field :luxury, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                      <i class="far fa-star fa-2x luxury"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="use_rate">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :use_rate, "人の出入り　　　　　" %>
+                    <%= fe.hidden_field :use_rate, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                      <i class="far fa-star fa-2x ur"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-8 offset-2">
+                  <div class="field" id="security">
+                    <span class="badge badge-danger">必須</span>
+                    <%= fe.label :security, "プライバシー保護　　" %>
+                    <%= fe.hidden_field :security, value: 0 %>
+                    <div class="star-icon">
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                      <i class="far fa-star fa-2x sec"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-sm-6 offset-3">
+          <%= f.submit '投稿', class:"btn btn-secondary btn-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <script>
@@ -195,5 +296,48 @@
     });
   });
 
+// for evaluation
+  function mouseOver (element) {
+    element.nextAll().removeClass('fas').addClass( "far" );
+    element.prevAll().removeClass( "far" ).addClass('fas');
+    element.removeClass( "far" ).addClass('fas');
+  };
+
+  function mouseLeave (element) {
+    element.nextAll().removeClass('fas').addClass('far');
+    element.prevAll().removeClass('far').addClass('fas');
+    element.removeClass('far').addClass('fas');
+  };
+
+  function mouseClick (element, className, idName) {
+    element.addClass(className).siblings().removeClass(className);
+    var score = element.prevAll().length + 1;
+    document.getElementById(idName).value = score;
+  }
+
+  $('.cleanliness').on('mouseover', function(){ mouseOver($(this)); });
+  $('.cleanliness').on('mouseleave', function(){ mouseLeave($('.cleanliness-active')); });
+  $('.cleanliness').on('click',function(){ mouseClick($(this), "cleanliness-active", "coordinate_evaluation_cleanliness"); });
+
+  $('.breadth').on('mouseover', function(){ mouseOver($(this)); });
+  $('.breadth').on('mouseleave', function(){ mouseLeave($('.breadth-active')); });
+  $('.breadth').on('click',function(){ mouseClick($(this), "breadth-active", "coordinate_evaluation_breadth"); });
+  
+  $('.luxury').on('mouseover', function(){ mouseOver($(this)); });
+  $('.luxury').on('mouseleave', function(){ mouseLeave($('.luxury-active')); });
+  $('.luxury').on('click',function(){ mouseClick($(this), "luxury-active", "coordinate_evaluation_luxury"); });
+  
+  $('.ur').on('mouseover', function(){ mouseOver($(this)); });
+  $('.ur').on('mouseleave', function(){ mouseLeave($('.ur-active')); });
+  $('.ur').on('click',function(){ mouseClick($(this), "ur-active", "coordinate_evaluation_use_rate"); });
+  
+  $('.sec').on('mouseover', function(){ mouseOver($(this)); });
+  $('.sec').on('mouseleave', function(){ mouseLeave($('.sec-active')); });
+  $('.sec').on('click',function(){ mouseClick($(this), "sec-active", "coordinate_evaluation_security"); });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>" async defer></script>
+<style>
+.fa .fas{
+  font-size:30px;
+}
+</style>
