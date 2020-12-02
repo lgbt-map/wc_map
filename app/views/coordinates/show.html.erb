@@ -1,7 +1,7 @@
 <div class="alert alert-secondary" role="alert">
   <div class="alert alert-light" role="alert">
     <div class="text-center">
-      <h5><%= @coordinate.name %></h5>
+      <h3><strong style="color:dimgray"><%= @coordinate.name %></strong></h3>
       <%= attachment_image_tag @coordinate, :image, :fill, 200, 130, size: "200x130", fallback: "no_image.jpg", id: 'coord_img' %>
       <hr class="show-hr">
       <div class="row">
@@ -9,7 +9,7 @@
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>メモ：</td>
+                <td style="color: #555555;">メモ：</td>
                 <% if @coordinate.memo.nil? %>
                   <td>----------</td>
                 <% else %>
@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">和式</p>
+                <strong style="color: #555555;">和式</strong>
                 <hr class="show-hr">
                 <% if @facility.toilet_jp %>
                   <i class="far fa-circle"></i>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">洋式</p>
+                <strong style="color: #555555;">洋式</strong>
                 <hr class="show-hr">
                 <% if @facility.toilet_west %>
                   <i class="far fa-circle"></i>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">ウォシュレット</p>
+                <strong style="color: #555555;">ウォシュレット</strong>
                 <hr class="show-hr">
                 <% if @facility.washlet %>
                   <i class="far fa-circle"></i>
@@ -60,7 +60,7 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">パウダールーム</p>
+                <strong style="color: #555555;">パウダールーム</strong>
                 <hr class="show-hr">
                 <% if @facility.powder_room %>
                   <i class="far fa-circle"></i>
@@ -71,7 +71,7 @@
             </div>
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">おむつ交換台設備</p>
+                <strong style="color: #555555;">おむつ交換台設備</strong>
                 <hr class="show-hr">
                 <% if @facility.changing_table %>
                   <i class="far fa-circle"></i>
@@ -82,7 +82,7 @@
             </div>
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">オストメイト</p>
+                <strong style="color: #555555;">オストメイト</strong>
                 <hr class="show-hr">
                 <% if @facility.ostomate %>
                   <i class="far fa-circle"></i>
@@ -95,7 +95,7 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">誰でもトイレ</p>
+                <strong style="color: #555555;">誰でもトイレ</strong>
                 <hr class="show-hr">
                 <% if @facility.can_everyone %>
                   <i class="far fa-circle"></i>
@@ -106,7 +106,7 @@
             </div>
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">男女別</p>
+                <strong style="color: #555555;">男女別</strong>
                 <hr class="show-hr">
                 <% if @facility.gender_separation %>
                   <i class="far fa-circle"></i>
@@ -117,7 +117,7 @@
             </div>
             <div class="col-sm-4">
               <div class="alert alert-light">
-                <p style="color: black;">車いす対応</p>
+                <strong style="color: #555555;">車いす対応</strong>
                 <hr class="show-hr">
                 <% if @facility.wheelchair %>
                   <i class="far fa-circle"></i>

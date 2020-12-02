@@ -3,18 +3,18 @@
     <div class="col-sm-10 offset-1">
       <div class="row">
         <div class="col-sm-10 offset-1">
-          <h4 style="padding-top: 60px;"><strong>位置情報</strong></h4>
+          <h4 style="padding-top: 60px;"><font color=cornflowerblue><strong>新規投稿</strong></font></h4>
           <hr>
         </div>
       </div>
-      <div class="form-group" style="padding-top: 60px;">
+      <div class="form-group" style="padding-top: 60px;" >
         <div class="row">
           <div class="col-sm-5 offset-1">
-            <p>施設名 <span class="badge badge-danger">必須</span></p>
-            <%= f.text_field :name, class: 'form-control', placeholder: '例) 東京駅〇〇改札' %>
+            <strong><font color=dimgray>施設名 </font><span class="badge badge-danger">必須</span></strong>
+            <%= f.text_field :name, class: 'form-control', placeholder: '例) 東京駅〇〇改札'  %>
           </div>
           <div class="col-sm-5">
-            <p>メモ</p>
+            <strong><font color=dimgray>メモ</font></strong>
             <%= f.text_area :memo, rows: "5", value: "", class: 'form-control', placeholder: '例) 入口に大きな段差あり' %>
           </div>
         </div>
@@ -22,7 +22,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-sm-10 offset-1">
-            <p>住所 <span class="badge badge-danger">必須</span></p>
+            <strong><font color=dimgray>住所 </font><span class="badge badge-danger">必須</span></strong>
             <%= f.text_field :address, class: 'form-control', id: "input-address", placeholder: '例) 東京都千代田区丸の内１丁目' %>
           </div>
         </div>
@@ -52,7 +52,7 @@
       </div>
       <div class="row">
         <div class="col-sm-10 offset-1">
-          <h4 style="padding-top: 60px;"><strong>設備</strong></h4>
+          <h4 style="padding-top: 60px;"><font color=dimgray><strong>設備</strong></font></h4>
           <hr>
         </div>
       </div>
@@ -60,7 +60,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-sm-4 offset-1 alert alert-secondary text-center">
-              <h5><b>Toilet Style</b></h5>
+              <h5><font color=cornflowerblue><b>Toilet Style</b></font></h5>
               <div class="custom-control custom-checkbox">
                 <%= ff.check_box :toilet_jp, class: "custom-control-input" %>
                 <%= ff.label :toilet_jp, "和式トイレ", class: "custom-control-label" %>
@@ -71,7 +71,7 @@
               </div>
             </div>
             <div class="col-sm-4 offset-2 alert alert-secondary text-center">
-              <h5><b>Optional</b></h5>
+              <h5><font color=cornflowerblue><b>Optional</b></font></h5>
               <div class="custom-control custom-checkbox">
                 <%= ff.check_box :washlet, class: "custom-control-input" %>
                 <%= ff.label :washlet, "ウォシュレット　", class: "custom-control-label" %>
@@ -94,7 +94,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-sm-4 offset-1 alert alert-secondary text-center">
-              <h5><b>Usage classification</b></h5>
+              <h5><font color=cornflowerblue><b>Usage classification</b></font></h5>
               <div class="custom-control custom-checkbox">
                 <%= ff.check_box :can_everyone, class: "custom-control-input" %>
                 <%= ff.label :can_everyone, "誰でもトイレ", class: "custom-control-label" %>
@@ -215,7 +215,7 @@
       <% end %>
       <div class="row">
         <div class="col-sm-6 offset-3">
-          <%= f.submit '保存', class:"btn btn-secondary btn-block" %>
+          <%= f.submit '投稿', class:"btn btn-secondary btn-block" %>
         </div>
       </div>
     </div>
@@ -254,19 +254,19 @@
       }
     });
   });
-  
+
   $( document ).on('turbolinks:load', function() {
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-  
+
         reader.onload = function (e) {
           $('#avatar_img_prev').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
       }
     }
-  
+
     $("#post_img").change(function(){
       $('#avatar_img_prev').removeClass('hidden');
       $('.avatar_present_img').remove();
@@ -334,14 +334,10 @@
   $('.sec').on('mouseover', function(){ mouseOver($(this)); });
   $('.sec').on('mouseleave', function(){ mouseLeave($('.sec-active')); });
   $('.sec').on('click',function(){ mouseClick($(this), "sec-active", "coordinate_evaluation_security"); });
-
-
-
 </script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>" async defer></script>
 <style>
 .fa .fas{
   font-size:30px;
 }
-
 </style>
