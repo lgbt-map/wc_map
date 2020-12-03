@@ -11,9 +11,11 @@ class CoordinatesController < ApplicationController
     gon.evaluate = [@evaluations.sum(:cleanliness), @evaluations.sum(:breadth),
                     @evaluations.sum(:luxury), @evaluations.sum(:use_rate), @evaluations.sum(:security)]
     evaluations_num = @evaluations.count
-    gon.data = gon.evaluate.map do |value|
+    gon.averages = gon.evaluate.map do |value|
       value / evaluations_num
     end
+    @total_average = gon.averages.sum / gon.evaluation_columns.length
+    gon.total_average = @total_average
   end
 
   def new
