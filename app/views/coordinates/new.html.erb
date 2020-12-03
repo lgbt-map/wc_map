@@ -125,7 +125,7 @@
                 <div class="col-sm-8 offset-2">
                   <div class="field" id="cleanliness">
                     <span class="badge badge-danger">必須</span>
-                    <%= fe.label :cleanliness, "清潔感　　　　　　　" %>
+                    <%= fe.label :cleanliness, "清潔感　　　　　　0", id: 'cleanliness_label' %>
                     <%= fe.hidden_field :cleanliness, value: 0 %>
                     <div class="star-icon">
                       <i class="far fa-star fa-2x cleanliness"></i>
@@ -143,7 +143,7 @@
                 <div class="col-sm-8 offset-2">
                   <div class="field" id="breadth">
                     <span class="badge badge-danger">必須</span>
-                    <%= fe.label :breadth, "広さ　　　　　　　　" %>
+                    <%= fe.label :breadth, "広さ　　　　　　　0", id: 'breadth_label' %>
                     <%= fe.hidden_field :breadth, value: 0 %>
                     <div class="star-icon">
                       <i class="far fa-star fa-2x breadth"></i>
@@ -161,7 +161,7 @@
                 <div class="col-sm-8 offset-2">
                   <div class="field" id="luxury">
                     <span class="badge badge-danger">必須</span>
-                    <%= fe.label :luxury, "高級感　　　　　　　" %>
+                    <%= fe.label :luxury, "高級感　　　　　　0", id: 'luxury_label' %>
                     <%= fe.hidden_field :luxury, value: 0 %>
                     <div class="star-icon">
                       <i class="far fa-star fa-2x luxury"></i>
@@ -179,7 +179,7 @@
                 <div class="col-sm-8 offset-2">
                   <div class="field" id="use_rate">
                     <span class="badge badge-danger">必須</span>
-                    <%= fe.label :use_rate, "人の出入り　　　　　" %>
+                    <%= fe.label :use_rate, "人の出入り　　　　0", id: 'use_rate_label' %>
                     <%= fe.hidden_field :use_rate, value: 0 %>
                     <div class="star-icon">
                       <i class="far fa-star fa-2x ur"></i>
@@ -197,7 +197,7 @@
                 <div class="col-sm-8 offset-2">
                   <div class="field" id="security">
                     <span class="badge badge-danger">必須</span>
-                    <%= fe.label :security, "プライバシー保護　　" %>
+                    <%= fe.label :security, "プライバシー保護　0", id: 'security_label' %>
                     <%= fe.hidden_field :security, value: 0 %>
                     <div class="star-icon">
                       <i class="far fa-star fa-2x sec"></i>
@@ -309,31 +309,37 @@
     element.removeClass('far').addClass('fas');
   };
 
-  function mouseClick (element, className, idName) {
-    element.addClass(className).siblings().removeClass(className);
+  function mouseClick (element, className, name, text) {
     var score = element.prevAll().length + 1;
+    var idName = "coordinate_evaluation_" + name;
+    var labelName = name + "_label";
+    var spaceBase = 9;
+    var spaceNumber = spaceBase - text.length;
+    
+    element.addClass(className).siblings().removeClass(className);
     document.getElementById(idName).value = score;
+    document.getElementById(labelName).innerText = text + "　".repeat(spaceNumber) + score;
   }
 
   $('.cleanliness').on('mouseover', function(){ mouseOver($(this)); });
   $('.cleanliness').on('mouseleave', function(){ mouseLeave($('.cleanliness-active')); });
-  $('.cleanliness').on('click',function(){ mouseClick($(this), "cleanliness-active", "coordinate_evaluation_cleanliness"); });
+  $('.cleanliness').on('click',function(){ mouseClick($(this), "cleanliness-active", "cleanliness", "清潔感"); });
 
   $('.breadth').on('mouseover', function(){ mouseOver($(this)); });
   $('.breadth').on('mouseleave', function(){ mouseLeave($('.breadth-active')); });
-  $('.breadth').on('click',function(){ mouseClick($(this), "breadth-active", "coordinate_evaluation_breadth"); });
+  $('.breadth').on('click',function(){ mouseClick($(this), "breadth-active", "breadth", "広さ"); });
   
   $('.luxury').on('mouseover', function(){ mouseOver($(this)); });
   $('.luxury').on('mouseleave', function(){ mouseLeave($('.luxury-active')); });
-  $('.luxury').on('click',function(){ mouseClick($(this), "luxury-active", "coordinate_evaluation_luxury"); });
+  $('.luxury').on('click',function(){ mouseClick($(this), "luxury-active", "luxury", "高級感"); });
   
   $('.ur').on('mouseover', function(){ mouseOver($(this)); });
   $('.ur').on('mouseleave', function(){ mouseLeave($('.ur-active')); });
-  $('.ur').on('click',function(){ mouseClick($(this), "ur-active", "coordinate_evaluation_use_rate"); });
+  $('.ur').on('click',function(){ mouseClick($(this), "ur-active", "use_rate", "人の出入り"); });
   
   $('.sec').on('mouseover', function(){ mouseOver($(this)); });
   $('.sec').on('mouseleave', function(){ mouseLeave($('.sec-active')); });
-  $('.sec').on('click',function(){ mouseClick($(this), "sec-active", "coordinate_evaluation_security"); });
+  $('.sec').on('click',function(){ mouseClick($(this), "sec-active", "security", "プライバシー保護"); });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>" async defer></script>
 <style>
